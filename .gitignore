@@ -1,0 +1,15 @@
+.neptune/
+datamount/
+tmp/
+configs/__pycache__
+data/__pycache__
+debug_ipynb/
+
+repos/EternaFold/*/*.o
+repos/EternaFold/src/contrafold
+repos/EternaFold/src/api_test
+repos/EternaFold/src/optimize.*
+repos/EternaFold/input_data/*
+repos/ternaFold/old_input_data/*
+repos/EternaFold/datalists/*.txt
+repos/EternaFold/local_analysis/*

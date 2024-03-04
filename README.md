@@ -11,8 +11,22 @@
 首先安装镜像:
 > docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3
 下载库,
+> cd Stanford-Ribonanza-RNA-Folding-32th-place-solution
+> pip install -r requirements.txt
+> mkdir datamount
+> cd datamount
+> 
+下载kaggle数据，
+需要设置kaggle登录口令：如有需要口令可以邮件联系我zjhzjh124@icloud.com
+> export KAGGLE_USERNAME="..."
+> export KAGGLE_KEY="..."
+> kaggle datasets download -d iafoss/stanford-ribonanza-rna-folding-converted
+> unzip -n stanford-ribonanza-rna-folding-converted.zip
+> rm stanford-ribonanza-rna-folding-converted.zip
+> cd ..
+> 
 
-下载数据
+
 ...
 
 训练

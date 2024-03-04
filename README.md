@@ -24,7 +24,8 @@
 > unzip -n stanford-ribonanza-rna-folding-converted.zip
 > rm stanford-ribonanza-rna-folding-converted.zip
 > cd ..
-> 
+> cd /workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/repos/EternaFold/src
+> make contrafold
 
 
 ...

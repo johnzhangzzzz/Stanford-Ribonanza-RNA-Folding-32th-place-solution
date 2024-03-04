@@ -9,7 +9,7 @@
 
 为了更方便的在不同环境下运行程序,我使用了虚拟环境docker,
 首先安装镜像:
-...
+> docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3
 下载库,
 
 下载数据

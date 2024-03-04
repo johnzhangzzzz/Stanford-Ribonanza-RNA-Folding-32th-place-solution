@@ -1,1 +1,1 @@
-eternafold: /workspace/John/repos/EternaFold/src
+eternafold: /workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/repos/EternaFold/src

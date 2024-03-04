@@ -9,14 +9,15 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 
-#%env PYTHONPATH=/workspace/John/arnie
-os.environ['PYTHONPATH']='/workspace/John/repos/arnie'
-#%env ARNIEFILE=/workspace/John/my_arnie_file.txt
-os.environ['ARNIEFILE']='/workspace/John/repos/arnie/my_arnie_file.txt'#'/workspace/John/my_arnie_file.txt'
-#%env ETERNAFOLD_PATH=/workspace/John/EternaFold/src
-os.environ['ETERNAFOLD_PATH']='/workspace/John/repos/EternaFold/src'
-#%env ETERNAFOLD_PARAMETERS=/workspace/John/EternaFold/parameters/EternaFoldParams.v1
-os.environ['ETERNAFOLD_PARAMETERS']='/workspace/John/repos/EternaFold/parameters/EternaFoldParams.v1'
+#%env PYTHONPATH=/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/arnie
+os.environ['PYTHONPATH']='/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/repos/arnie'
+#%env ARNIEFILE=/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/my_arnie_file.txt
+os.environ['ARNIEFILE']='/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/repos/arnie/my_arnie_file.txt'
+#'/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/my_arnie_file.txt'
+#%env ETERNAFOLD_PATH=/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/EternaFold/src
+os.environ['ETERNAFOLD_PATH']='/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/repos/EternaFold/src'
+#%env ETERNAFOLD_PARAMETERS=/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/EternaFold/parameters/EternaFoldParams.v1
+os.environ['ETERNAFOLD_PARAMETERS']='/workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/repos/EternaFold/parameters/EternaFoldParams.v1'
 
 from arnie.bpps import bpps
 my_sequence = 'CGCUGUCUGUACUUGUAUCAGUACACUGACGAGUCCCUAAAGGACGAAACAGCG'

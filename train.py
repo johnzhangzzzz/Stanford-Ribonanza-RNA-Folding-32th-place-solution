@@ -68,7 +68,7 @@ neptune_run = neptune.init_run(
         api_token=neptune_api_token,
         capture_stdout=False,
         capture_stderr=False,
-        source_files=fns
+        #source_files=fns
     )
 
 #print(f"Neptune system id : {neptune_run._sys_id}")

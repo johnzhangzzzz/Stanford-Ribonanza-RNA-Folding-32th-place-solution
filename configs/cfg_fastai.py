@@ -15,10 +15,11 @@ from types import SimpleNamespace
 cfg = SimpleNamespace(**{})
 
 #logging
-cfg.neptune_project = "zjh/RNA"
+#cfg.neptune_project = "zjh/RNA"
+cfg.neptune_project = "common/quickstarts"
 cfg.neptune_connection_mode = "async"
 cfg.tags = "base"
-cfg.neptune_api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJjZTQ1ODM1YS1jZjI2LTQxYzItYjkxZC1jYWZjYTI3MzNjNGIifQ=="
+cfg.neptune_api_token="..."
 
 cfg.Checkpoint=[
     'datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth',

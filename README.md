@@ -9,5 +9,14 @@
 
 为了更方便的在不同环境下运行程序,我使用了虚拟环境docker,
 首先安装镜像:
+...
+下载库,
 
 下载数据
+...
+
+训练
+
+
+# References
+SqueezeFormer (pytorch)[https://github.com/upskyy/Squeezeformer/](https://github.com/upskyy/Squeezeformer/)

@@ -32,7 +32,14 @@
 
 ...
 
-##训练  
+## 训练  
+> python train.py -C cfg_0
+>> Explore the metadata in the Neptune app:
+>> https://app.neptune.ai/common/quickstarts/e/QUI-99276/metadata
+>> Checkpoint save : datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth
+
+## 预测
+> python infer.py --Checkpoint ['datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth']
 
 
 

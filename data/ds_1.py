@@ -27,12 +27,20 @@ sss=bpps(my_sequence, package='eternafold')
   
          
 def dict_to(x, device='cuda'):
+    '''对字典中的数据使用to(device)方法
+    zz={'a':1,'b':2}
+    for z in zz:
+        print(zz[z])
+    '''
     return {k:x[k].to(device) for k in x}
 
-def to_device(x, device='cuda'):
-    return tuple(dict_to(e,device) for e in x)
+'''def to_device(x, device='cuda'):
+    return tuple(dict_to(e,device) for e in x)'''
 
 class DeviceDataLoader:
+    '''
+    先对dataloader迭代产生的数据，包括df&target，应用dict_to方法，封装到tuple中
+    '''
     def __init__(self, dataloader, device='cuda'):
         self.dataloader = dataloader
         self.device = device
@@ -46,6 +54,10 @@ class DeviceDataLoader:
             yield tuple(dict_to(x, self.device) for x in batch)
 
 class BPPs_RNA_Dataset(Dataset):
+    '''
+    将原始数据包装成torch.utils.data.Dataset类，
+    并使得输出数据满足Squeezeformer输入需求
+    '''
     def __init__(self, df, mode='train', seed=2023, fold=0, nfolds=4, 
                  mask_only=False, **kwargs):
         self.seq_map = {'A':0,'C':1,'G':2,'U':3}
@@ -113,6 +125,7 @@ class BPPs_RNA_Dataset(Dataset):
                 'sn':sn, 'mask':mask}
     
 class RNA_Dataset_Test(Dataset):
+    '''将数据包装成infer时需要的输入格式'''
     def __init__(self, df, mask_only=False, **kwargs):
         self.seq_map = {'A':0,'C':1,'G':2,'U':3}
         #df['L'] = df.sequence.apply(len)
@@ -146,6 +159,7 @@ class RNA_Dataset_Test(Dataset):
     
 
 class LenMatchBatchSampler(torch.utils.data.BatchSampler):
+    '''由于每个sample中mask token数量不一，所以长度匹配采样，让每个batch中的实际训练数据量保持一致'''
     def __iter__(self):
         buckets = [[]] * 100
         yielded = 0
@@ -178,15 +192,3 @@ class LenMatchBatchSampler(torch.utils.data.BatchSampler):
             yielded += 1
             yield batch
             
-class DeviceDataLoader:
-    def __init__(self, dataloader, device='cuda'):
-        self.dataloader = dataloader
-        self.device = device
-        #self.n=1
-    
-    def __len__(self):
-        return len(self.dataloader)
-    
-    def __iter__(self):
-        for batch in self.dataloader:
-            yield tuple(dict_to(x, self.device) for x in batch)

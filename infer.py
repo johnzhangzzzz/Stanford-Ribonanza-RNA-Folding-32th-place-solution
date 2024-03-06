@@ -94,3 +94,4 @@ if not os.path.exists(out_dir):
 
 df.to_csv(f"{out_dir}/submission.csv", index=False, float_format='%.4f') # 6.5GB
 df.head()
+print(f"submission save : " +  f"{out_dir}/submission.csv")

@@ -21,7 +21,7 @@ import sys
 import argparse
 from copy import copy
 import importlib
-
+ 
 BASEDIR= './' 
 for DIRNAME in 'configs data models postprocess metrics utils repos'.split():
     sys.path.append(f'{BASEDIR}/{DIRNAME}/')
@@ -276,11 +276,10 @@ for epoch in range(cfg.epochs):
     if not cfg.save_only_last_ckpt:
         torch.save({"model": model.state_dict()}, f"{cfg.output_dir}/fold{fold}/checkpoint_last_seed{cfg.SEED}.pth")    
         
-
+run_id = neptune_run["sys/id"].fetch()
+neptune_run.stop()
 
     
 torch.save({"model": model.state_dict()}, f"{cfg.output_dir}/fold{fold}/checkpoint_last_seed{cfg.SEED}.pth")
 print(f"Checkpoint save : " +  f"{cfg.output_dir}/fold{fold}/checkpoint_last_seed{cfg.SEED}.pth")
 
-run_id = neptune_run["sys/id"].fetch()
-neptune_run.stop()

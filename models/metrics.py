@@ -1,6 +1,7 @@
 from fastai.vision.all import *
 
 class MAE(Metric):
+    '''accumulate时滤除mask值'''
     def __init__(self): 
         self.reset()
         

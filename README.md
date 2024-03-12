@@ -7,19 +7,20 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 简单来讲本次比赛本质上是一个seq_to_seq的预测, 但不同于一般的asr任务（如翻译，归纳等）此任务输入序列与输出序列长度相等且两个序列中每个元素一一对应的。输入数据跟常规的text输入结构相似，seq中每个元素与其他位置的元素存在联系，所以很适合用transfomer结构处理数据，不同点是每个seq还有几个额外属性，例如signal_to_noise等；输出与常见类型的asr任务不一样，我们需要模型计算输入序列上每个元素与两个固定反应类型之间的回归输出，即我们需要根据输入数据预测seq中每个元素对于反应A和反应B的反应性强弱。 具体说明详见上述链接中的数据说明部分。  
 
 我主要的创新是：   
-- 采用针对此次任务该进的Squeezeformer取代传统的transfomer作为主体结构。  
+- 采用针对此次任务该进的Squeezeformer取代传统的transfomer作为sequence-encode。  
 - 利用bpps计算得到的序列自相关矩阵作为pro_transform, 可提升处理不同长度seq时的泛化能力。  
 
-以下改动对在public测试集上的性能提升不大，但可有效提升在private测试机集上泛化能力，因为后者seq长度平均是前者的2倍：
+以下改动对在public测试集上的性能提升不大，但可有效提升在private测试集上泛化能力，因为后者seq长度平均是前者的2倍：
 - 输出采用对输出采用sigmoid运算，此改动可提升在最终的测试数据泛化能力  
 - 利用signal_to_noise，来修正的每个seq的在loss累加时的权重，此举提升了对最终测试数据的泛化能力  
 
 # 准备
 
-为了保持环境的一致性，我使用docker来部署模型,所用container来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch),安装并运行container:
+为了保持环境的一致性，我使用docker来部署模型,所用container来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch),  
+首先安装并运行container:
 > docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3  
 
-下载此repository并安装必要的packages
+下载此repository并安装一些必要的packages  
 > git clone https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-solution.git
 > cd Stanford-Ribonanza-RNA-Folding-32th-place-solution  
 > pip install -r requirements.txt  

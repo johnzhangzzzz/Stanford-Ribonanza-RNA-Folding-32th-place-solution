@@ -41,12 +41,14 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 > cd /workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/  
 
 ## 训练  
-模型训练结果，以及对应的参数cfg均会上传至neptune.ai，
+
 > python train.py -C cfg_0
->> Explore the metadata in the Neptune app:
->> https://app.neptune.ai/common/quickstarts/e/QUI-99276/metadata
+>> Explore the metadata in the Neptune app:  
+>> <https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata>  
 >> Checkpoint save : datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth
-! [](fig_1.png)
+![fig_1.png](https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-solution/blob/72f1954835dc9bd4f3785bf48204e65d294be736/fig_1.png)    
+模型训练结果，以及对应的训练参数均会上传至[neptune.ai](https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata)，
+
 ## model summary
 显示模型的结构细节  
 > python summary.py

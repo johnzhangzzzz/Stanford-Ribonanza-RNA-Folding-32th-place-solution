@@ -46,7 +46,11 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 >> https://app.neptune.ai/common/quickstarts/e/QUI-99276/metadata
 >> Checkpoint save : datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth
 
-## 预测
+# model summary
+
+
+## 预测  
+可将一个或者多个训练的模型地址放入Checkpoint参数列表中
 > python infer.py --Checkpoint ['datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth']
 
 

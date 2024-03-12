@@ -88,6 +88,7 @@ SEED=cfg.SEED
 nfolds=cfg.nfolds
 fold=cfg.fold
 set_seed=importlib.import_module(cfg.utils).set_seed
+set_seed(SEED)
 
 ds_train = BPPs_RNA_Dataset(df, mode='train', fold=fold, nfolds = nfolds)
 ds_train_len = BPPs_RNA_Dataset(df, mode='train', fold=fold, 
@@ -112,6 +113,7 @@ len_sampler_val = LenMatchBatchSampler(sampler_val, batch_size=cfg.bs,
             drop_last=False)
 dl_val= DeviceDataLoader(torch.utils.data.DataLoader(ds_val, 
             batch_sampler=len_sampler_val, num_workers=cfg.num_workers), cfg.device)
+gc.collect()
 
 if not os.path.exists(f"{cfg.output_dir}/fold{fold}/"): 
     os.makedirs(f"{cfg.output_dir}/fold{fold}/")
@@ -121,6 +123,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 model = Squeezeformer_RNA(cfg).to(cfg.device)
 
 total_steps = len(ds_train)
+if cfg.debug:
+    total_steps = total_steps//cfg.debug_fact
 optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
 scheduler = transformers.get_cosine_schedule_with_warmup(
             optimizer,

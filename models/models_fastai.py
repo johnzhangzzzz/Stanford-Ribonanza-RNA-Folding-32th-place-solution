@@ -335,3 +335,102 @@ class Squeezeformer_RNA(nn.Module):
             half_step_residual = cfg.encoder_config.half_step_residual,
         )
     """
+
+class Squeezeformer_RNA_debug(nn.Module):
+    """
+    Squeezeformer incorporates the Temporal U-Net structure, which reduces the cost of the
+    multi-head attention modules on long sequences, and a simpler block structure of feed-forward module,
+    followed up by multi-head attention or convolution modules,
+    instead of the Macaron structure proposed in Conformer.
+
+    Args:
+        num_classes (int): Number of classification classes
+        input_dim (int, optional): Dimension of input vector
+        encoder_dim (int, optional): Dimension of squeezeformer encoder
+        num_encoder_layers (int, optional): Number of squeezeformer blocks
+        reduce_layer_index (int, optional): The layer index to reduce sequence length
+        recover_layer_index (int, optional): The layer index to recover sequence length
+        num_attention_heads (int, optional): Number of attention heads
+        feed_forward_expansion_factor (int, optional): Expansion factor of feed forward module
+        conv_expansion_factor (int, optional): Expansion factor of squeezeformer convolution module
+        feed_forward_dropout_p (float, optional): Probability of feed forward module dropout
+        attention_dropout_p (float, optional): Probability of attention module dropout
+        conv_dropout_p (float, optional): Probability of squeezeformer convolution module dropout
+        conv_kernel_size (int or tuple, optional): Size of the convolving kernel
+        half_step_residual (bool): Flag indication whether to use half step residual or not
+    Inputs: inputs
+        - **inputs** (batch, time, dim): Tensor containing input vector
+        - **input_lengths** (batch): list of sequence input lengths
+    Returns: outputs, output_lengths
+        - **outputs** (batch, out_channels, time): Tensor produces by squeezeformer.
+        - **output_lengths** (batch): list of sequence output lengths
+    """
+
+    def __init__(self,cfg) -> None:
+        super(Squeezeformer_RNA_debug, self).__init__() 
+        self.encoder = SqueezeformerEncoder(
+            input_dim=cfg.encoder_config.input_dim,
+            encoder_dim=cfg.encoder_config.encoder_dim,
+            num_layers=cfg.encoder_config.num_encoder_layers,
+            reduce_layer_index=cfg.encoder_config.reduce_layer_index,
+            recover_layer_index=cfg.encoder_config.recover_layer_index,
+            num_attention_heads=cfg.encoder_config.num_attention_heads,
+            feed_forward_expansion_factor = cfg.encoder_config.feed_forward_expansion_factor,
+            conv_expansion_factor = cfg.encoder_config.conv_expansion_factor,
+            input_dropout_p = cfg.encoder_config.input_dropout_p,
+            feed_forward_dropout_p = cfg.encoder_config.feed_forward_dropout_p,
+            attention_dropout_p = cfg.encoder_config.attention_dropout_p,
+            conv_dropout_p = cfg.encoder_config.conv_dropout_p,
+            conv_kernel_size = cfg.encoder_config.conv_kernel_size,
+            half_step_residual = cfg.encoder_config.half_step_residual,
+        )
+        
+        self.token_embeddings = nn.Embedding(4,cfg.encoder_config.encoder_dim)
+        #self.position_embeddings = layers.Embedding(input_dim=sequence_length, output_dim=output_d)
+        
+        self.fc = nn.Linear(cfg.encoder_config.encoder_dim, 2)
+        self.out=torch.nn.Sigmoid()
+
+    def count_parameters(self) -> int:
+        """Count parameters of encoder"""
+        return self.encoder.count_parameters()
+
+    def forward(self,x) -> Tuple[Tensor, Tensor]:  #inputs: Tensor, input_lengths: Tensor
+        """
+        Forward propagate a `inputs` and `targets` pair for training.
+        Args:
+            inputs (torch.FloatTensor): A input sequence passed to encoder. Typically for inputs this will be a padded
+                `FloatTensor` of size ``(batch, seq_length, dimension)``.
+            input_lengths (torch.LongTensor): The length of input tensor. ``(batch)``
+        Returns:
+            * predictions (torch.FloatTensor): Result of model predictions.
+        """
+        inputs = x['inputs'] 
+        seq=x['seq']
+        input_lengths = x['input_lengths']
+        inputs =self.token_embeddings(inputs)
+        #inputs=torch.matmul(seq,inputs)
+        encoder_outputs, encoder_output_lengths = self.encoder(inputs,input_lengths)
+        outputs = self.fc(encoder_outputs)
+        #outputs = F.log_softmax(outputs, dim=-1)
+        #outputs = self.out(outputs)
+        return outputs #, encoder_output_lengths
+    
+    """
+            self.encoder = SqueezeformerEncoder(
+            input_dim=cfg.encoder_config.input_dim,
+            encoder_dim=cfg.encoder_config.encoder_dim,
+            num_layers=cfg.encoder_config.num_encoder_layers,
+            reduce_layer_index=cfg.encoder_config.reduce_layer_index,
+            recover_layer_index=cfg.encoder_config.recover_layer_index,
+            num_attention_heads=cfg.encoder_config.num_attention_heads,
+            feed_forward_expansion_factor = cfg.encoder_config.feed_forward_expansion_factor,
+            conv_expansion_factor = cfg.encoder_config.conv_expansion_factor,
+            input_dropout_p = cfg.encoder_config.input_dropout_p,
+            feed_forward_dropout_p = cfg.encoder_config.feed_forward_dropout_p,
+            attention_dropout_p = cfg.encoder_config.attention_dropout_p,
+            conv_dropout_p = cfg.encoder_config.conv_dropout_p,
+            conv_kernel_size = cfg.encoder_config.conv_kernel_size,
+            half_step_residual = cfg.encoder_config.half_step_residual,
+        )
+    """

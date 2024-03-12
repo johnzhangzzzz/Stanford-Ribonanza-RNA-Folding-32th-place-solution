@@ -35,24 +35,24 @@ cfg.utils='utl'
 cfg.OUT = './'
 
 #data set
-cfg.debug=True #debug模式，用少量数据方便调试
+cfg.debug=False #debug模式，用少量数据方便调试
 cfg.debug_fact=10 #实际数据=总数据//debug_fact
 cfg.nfolds=4 #总的fold数
 cfg.fold=0 #当前fold
 cfg.bs = 32 #data batchsize
-cfg.num_workers = 16 #预处理数据时cpu线程
+cfg.num_workers = 12 #预处理数据时cpu线程
 cfg.device= 'cuda' if torch.cuda.is_available() else 'cpu'
 cfg.SEED=2023
 
 #train_set
-cfg.epochs = 30
+cfg.epochs = 32
 cfg.mixed_precision=True
 cfg.grad_accumulation = 8.
-cfg.lr=1e-6
+cfg.lr=5e-4
 cfg.weight_decay = 0.05
-cfg.clip_grad = 4.
+cfg.clip_grad = 3.0
 cfg.track_grad_norm=False
-cfg.warmup = 10
+cfg.warmup = 1
 
 #EVAL
 #cfg.calc_metric = True

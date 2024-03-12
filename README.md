@@ -46,7 +46,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 >> Explore the metadata in the Neptune app:
 >> https://app.neptune.ai/common/quickstarts/e/QUI-99276/metadata
 >> Checkpoint save : datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth
-
+! [](fig_1.png)
 ## model summary
 显示模型的结构细节  
 > python summary.py

@@ -16,7 +16,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 
 ## 准备
 
-为了保持环境的一致性，我使用docker来部署模型,所用container来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch),  
+为了保持环境的一致性，我使用docker来部署模型, 所用container来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch),    
 首先安装并运行container:
 > docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3  
 

@@ -39,7 +39,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 
 注意其中的EternaFold库，需要需要编译下对应目录下Contrafold.cpp才能使用
 > cd /workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/repos/EternaFold/src  
-> make contrafold
+> make contrafold  
 > cd /workspace/Stanford-Ribonanza-RNA-Folding-32th-place-solution/
 
 ## model summary

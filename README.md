@@ -20,7 +20,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 首先安装并运行container:
 > docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3  
 
-下载此repository并安装一些必要的packages  
+下载此repository，并安装一些必要的packages  
 > git clone https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-solution.git  
 > cd Stanford-Ribonanza-RNA-Folding-32th-place-solution   
 > pip install -r requirements.txt    
@@ -29,7 +29,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 > mkdir datamount  
 > cd datamount
 
-这里需要注意得设置kaggle登录口令才能在下载训练数据：如有需要口令可以邮件联系我zjhzjh124@icloud.com，或者自己注册一个kaggle账号  
+这里需要注意得设置kaggle登录口令才能使用kaggle命令下载训练数据。如有需要口令可以邮件联系我zjhzjh124@icloud.com，或者自己注册一个kaggle账号  
 > export KAGGLE_USERNAME="..."  
 > export KAGGLE_KEY="..."  
 > kaggle datasets download -d iafoss/stanford-ribonanza-rna-folding-converted  

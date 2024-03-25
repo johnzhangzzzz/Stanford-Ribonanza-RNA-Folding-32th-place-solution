@@ -4,10 +4,12 @@
 
 Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanza-rna-folding)  
 
-简单来讲本次比赛本质上是一个seq_to_seq的预测, 但不同于一般的asr任务（如翻译，归纳等）此任务输入序列与输出序列长度相等且两个序列中每个元素一一对应的。输入数据跟常规的text输入结构相似，seq中每个元素与其他位置的元素存在联系，所以很适合用transfomer结构处理数据，不同点是每个seq还有几个额外属性，例如signal_to_noise等；输出与常见类型的asr任务不一样，我们需要模型计算输入序列上每个元素与两个固定反应类型之间的回归输出，即我们需要根据输入数据预测seq中每个元素对于反应A和反应B的反应性强弱，所以也不需要像翻译任务一样需要decode。具体说明详见上述链接中的介绍。  
+本次比赛本质上是一个seq_to_seq的预测, 且与通常的LLM生成任务一样, 需要对输入数据有一定的自适应能力, 因为本次任务输入数据类型,并不固定,但不同于一般的asr任务（如翻译，归纳等）此任务输入序列与输出序列长度相等且两个序列中每个元素一一对应的, 。输入数据跟常规的text输入结构相似，seq中每个元素与其他位置的元素存在联系，所以很适合用transfomer结构处理数据，不同点是每个seq还有几个额外属性，例如signal_to_noise等；输出与常见类型的asr任务不一样，我们需要模型计算输入序列上每个元素与两个固定反应类型之间的回归输出，即我们需要根据输入数据预测seq中每个元素对于反应A和反应B的反应性强弱，所以也不需要像翻译任务一样需要decode。具体说明详见上述链接中的介绍。  
+
+为了保证运行环境的一致性，我使用在docker上创建的container来部署模型, 所用image来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch), 我使用jupyter notebook进行初期代码调试,而后将代码转移到python script上
 
 我主要的创新是：   
-- 采用针对此次任务该进的Squeezeformer取代传统的transfomer作为sequence-encode。  
+- 采用针对此次任务该进的Squeezeformer取代传统的transfomer作为sequence-encode, 前者继承了后者对全局信息的提取能力,还可以更有效的提取局部特征
 - 利用bpps计算得到的序列自相关矩阵作为pro_transform, 可提升处理不同长度seq时的泛化能力。  
 
 以下改动对在public测试集上的性能提升不大，但可有效提升在private测试集上泛化能力，因为后者seq长度平均是前者的2倍：
@@ -16,7 +18,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 
 ## 准备
 
-为了保持环境的一致性，我使用docker来部署模型, 所用container来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch),    
+
 首先安装并运行container:
 > docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3  
 

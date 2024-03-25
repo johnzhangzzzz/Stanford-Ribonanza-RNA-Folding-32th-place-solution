@@ -4,7 +4,7 @@
 
 Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanza-rna-folding)  
 
-本次比赛本质上是一个seq_to_seq的预测, 但与通常的LLM生成任务一样, 需要对输入数据有一定的自适应能力, 因为每个sample的输入数据类型并不固定,但不同于一般的asr任务（如翻译，归纳等）此任务输入序列与输出序列长度相等且两个序列中每个元素一一对应的. 从数据结构上来说输入seq跟常规的text输入结构相似, 其每个元素与其他位置的元素存在联系, 所以很适合用transfomer结构处理数据, 不同点是每个sample可能还有几个额外属性，例如signal_to_noise等. 输出则需要模型计算输入序列上每个元素与两种反应类型之间反应性强弱. 由于输出不是传统文本数据,而是回归值,所以本模型不需要decode.具体模型的输入输出数据说明,可详见上述链接中的介绍。  
+本次比赛本质上是一个seq_to_seq的预测, 但与通常的LLM生成任务一样, 需要对输入数据有一定的自适应能力, 因为每个sample的输入数据类型并不固定,但不同于一般的asr任务（如翻译，归纳等）此任务输入序列与输出序列长度相等且两个序列中每个元素一一对应的. 从数据结构上来说, 每个输入数据均包含一个seq, 其构成跟常规的text输入结构相似, 其每个元素与其他位置的元素存在联系, 所以很适合用transfomer结构处理数据, 同时每个输入sample可能还有几个额外属性，例如signal_to_noise等,需要模型自适应处理. 输出则需要模型计预测序列上每个元素与两种反应类型之间反应性强弱. 由于输出不是传统文本数据,而是回归值,所以本模型不需要decode.具体模型的输入输出数据说明,可详见上述链接中的介绍。  
 
 为了保证运行环境的一致性，我使用在docker上创建的container来部署模型, 所用image来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch), 我使用jupyter notebook进行初期代码调试,而后通过模块化处理将代码转移到python script上,以便更高效的进行超参数调节.
 我利用naptune.ai对实验结果进行追踪对比等功能

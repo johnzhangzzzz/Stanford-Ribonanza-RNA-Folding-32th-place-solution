@@ -13,8 +13,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 - 对输出的各个回归值采用sigmoid运算. 
 - 利用signal_to_noise，来修正的每个seq的在loss累加时的权重.
 
-为了保证运行环境的一致性，我使用docker创建的container来部署模型, 所用image来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch), 我使用jupyter notebook进行初期代码调试,而后通过模块化处理将代码转移到python script上,以便更高效的进行超参数调节.
-训练时数据将实时上传保存至naptune.ai以方便我们对实验结果进行追踪对比等.
+为了保证运行环境的一致性，我使用docker创建的container来部署模型, 所用image来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch), 我使用jupyter notebook进行初期代码调试,而后通过模块化处理将代码转移到python script上,以便更高效的进行超参数调节.训练时数据将实时上传保存至naptune.ai以方便我们对实验结果进行追踪可视化对比等.
 
 
 ## 准备

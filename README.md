@@ -4,19 +4,18 @@
 
 Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanza-rna-folding)  
 
-本次比赛是一个RNA序列相关的seq_to_seq的预测, 同时相对通常的LLM生成任务, 需要对输入数据有一定的自适应能力, 因为每个sample的输入数据类型并不固定,但不同于一般的NLP任务（如翻译，归纳等）此任务输入序列与输出序列长度相等且两个序列中每个元素一一对应的. 从数据结构上来说, 每个输入数据均包含一个seq, 其构成跟常规的text输入结构相似, 其每个元素与其他位置的元素存在联系, 所以很适合用transfomer结构处理数据, 同时每个输入sample可能还有几个额外属性，例如signal_to_noise等,需要模型自适应处理. 输出则需要模型计预测序列上每个元素与两种反应类型之间反应性强弱. 由于输出不是传统文本数据,而是回归值,所以本模型不需要传统的decode.具体模型的输入输出数据说明,可详见上述链接中的介绍。  
-我的解决方案也是基于encoder-decoder 
+本次比赛是一个RNA相关的seq_to_seq的预测. 从数据结构上来说, 每个输入数据均包含一段文本序列, 其构成跟常规的text输入一样, 每个元素与其他位置的元素存在一定联系, 所以很适合用transfomer处理, 同时每个输入数据可能还有几个额外标量属性用于辅助预测, 需要模型自适应处理; 输出数据结构与一般的NLP任务有2点区别: 1.此任务输入序列与输出序列长度相等且序列中每个元素一一对应; 2.我们需要模型预测的是序列上每个元素与两种反应类型之间反应性强弱指标,这是一个回归值,而不是像输入一样的文本向量. 具体模型的输入输出数据说明,可详见上述链接中的介绍。  
 
-为了保证运行环境的一致性，我使用在docker上创建的container来部署模型, 所用image来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch), 我使用jupyter notebook进行初期代码调试,而后通过模块化处理将代码转移到python script上,以便更高效的进行超参数调节.
-我利用naptune.ai对实验结果进行追踪对比等功能
+我的解决方案基于一个encoder-decoder框架, 其中encoder采用的是根据本次任务改进的[Squeezeformer]<https://arxiv.org/pdf/2206.00888.pdf>, 相比一般的Transformer, 利用其attention-convolution框架可以更有效的提取局部和全局信息; 而decoder仅采用一个DNN模块, 因为我需要预测的并不是文本向量并不需要对其进行self-attention操作; 模型预测时, 由于输入输出sequence一一对应, 所以可以一次性生成整个序列的预测值, 而不需要像一般的sequenceto-sequence Transformer一样需要逐元素循环预测.  
 
-我主要的创新是：   
-- 采用针对此次任务该进的Squeezeformer取代传统的transfomer作为sequence-encode, 前者继承了后者对全局信息的提取能力,还可以更有效的提取局部特征
-- 利用bpps计算得到的序列自相关矩阵作为pro_transform, 可提升处理不同长度seq时的泛化能力。  
+以下正则化措施可有效提升模型泛化能力，特别是在序列长度相比训练数据特别长的情况下:
+- 利用bpps计算得到的序列自相关矩阵作为pro_transform.  
+- 对输出的各个回归值采用sigmoid运算. 
+- 利用signal_to_noise，来修正的每个seq的在loss累加时的权重.
 
-以下改动对在public测试集上的性能提升不大，但可有效提升在private测试集上泛化能力，因为后者seq长度平均是前者的2倍：
-- 输出采用对输出采用sigmoid运算，此改动可提升在最终的测试数据泛化能力  
-- 利用signal_to_noise，来修正的每个seq的在loss累加时的权重，此举提升了对最终测试数据的泛化能力  
+为了保证运行环境的一致性，我使用docker创建的container来部署模型, 所用image来自[此处](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch), 我使用jupyter notebook进行初期代码调试,而后通过模块化处理将代码转移到python script上,以便更高效的进行超参数调节.
+训练时数据将实时上传保存至naptune.ai以方便我们对实验结果进行追踪对比等.
+
 
 ## 准备
 

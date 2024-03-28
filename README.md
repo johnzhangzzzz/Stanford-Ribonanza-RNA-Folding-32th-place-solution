@@ -55,16 +55,18 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 >> <https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata>  
 >> Checkpoint save : datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth
 
-本例中lr与loss的训练信息如下：
+实验数据会实时同步至至neptune.ai,  
+例如,若要查看本次训练相关数据[请点击此链接](https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata), 可以看到本例中lr与loss的训练信息如下：
 ![fig_1.png](https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-solution/blob/72f1954835dc9bd4f3785bf48204e65d294be736/fig_1.png)     
 
-模型训练结果，以及对应的训练参数均会上传至[neptune.ai](https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata)。
+程序运行完成后模型被保存为datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth  
+
 
 
 
 
 ## 预测  
-可将一个或者多个训练过模型的地址放入Checkpoint参数列表中，进行集成运算
+可将一个或者多个训练过模型的地址放入Checkpoint参数列表中，进行集成预测
 > python infer.py --Checkpoint ['datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth']
 
 

@@ -55,8 +55,8 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 >> <https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata>  
 >> Checkpoint save : datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth
 
-实验数据会实时同步至至neptune.ai,  
-例如,若要查看本次训练相关数据[请点击此链接](https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata), 可以看到本例中lr与loss的训练信息如下：
+训练数据会实时同步至至neptune.ai, 用于数据可视化  
+例如, 若要查看本次训练相关的数据[可点击上述链接](https://app.neptune.ai/common/quickstarts/e/QUI-99519/metadata), 从中可以看到本例中lr与loss的训练信息如下：
 ![fig_1.png](https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-solution/blob/72f1954835dc9bd4f3785bf48204e65d294be736/fig_1.png)     
 
 程序运行完成后模型被保存为datamount/weights/cfg_0/fold0/checkpoint_last_seed2023.pth  
@@ -73,5 +73,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 
 
 # References
-SqueezeFormer (pytorch)[https://github.com/upskyy/Squeezeformer/](https://github.com/upskyy/Squeezeformer/)
+SqueezeFormer (pytorch): [https://github.com/upskyy/Squeezeformer/](https://github.com/upskyy/Squeezeformer/)  
+EternaFold: [https://github.com/eternagame/EternaFold](https://github.com/eternagame/EternaFold)   
+arnie: [https://github.com/DasLab/arnie](https://github.com/DasLab/arnie)
 

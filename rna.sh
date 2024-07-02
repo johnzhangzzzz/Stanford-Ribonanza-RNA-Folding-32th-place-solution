@@ -1,4 +1,3 @@
-cd Stanford-Ribonanza-RNA-Folding-32th-place-solution
 pip install -r requirements.txt
 mkdir datamount
 cd datamount

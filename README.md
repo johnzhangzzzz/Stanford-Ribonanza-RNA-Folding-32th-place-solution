@@ -23,8 +23,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 > docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3  
 
 进入创建的虚拟系统命令行界面，下载并进入此repository(若要快速预览此项目，也可在此操作完成后直接运行"chmod u+x *.sh ;./rna.sh")  
-> git clone https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-
-solution.git  
+> git clone https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-solution.git  
 > cd Stanford-Ribonanza-RNA-Folding-32th-place-solution
 
 安装packages

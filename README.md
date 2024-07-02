@@ -19,7 +19,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 ## 准备
 
 
-首先使用docker命令创建并运行container:
+首先使用docker命令创建并运行container,随后若要方便的预览，可直接在linux上运行[rna.sh]():
 > docker run --gpus all --name 20240124  -it --shm-size=32g nvcr.io/nvidia/pytorch:23.07-py3  
 
 下载此repository，并安装一些必要的packages  

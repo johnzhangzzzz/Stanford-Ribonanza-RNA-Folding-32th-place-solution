@@ -44,6 +44,9 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
 模型可视化:  
 > python summary.py
 
+运行结果如下:
+![fig_2.png](https://github.com/johnzhangzzzz/Stanford-Ribonanza-RNA-Folding-32th-place-solution/blob/main/fig_2.png)
+
 ## 训练  
 
 > python train.py -C cfg_0

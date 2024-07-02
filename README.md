@@ -29,7 +29,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
   
 下载kaggle数据,  
 > mkdir datamount  
-> cd datamount 
+> cd datamount  
 > kaggle datasets download -d iafoss/stanford-ribonanza-rna-folding-converted  
 > unzip -n stanford-ribonanza-rna-folding-converted.zip  
 > rm stanford-ribonanza-rna-folding-converted.zip  

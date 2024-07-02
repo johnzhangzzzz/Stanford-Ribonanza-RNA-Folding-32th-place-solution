@@ -29,11 +29,7 @@ Competiton website: [link](https://www.kaggle.com/competitions/stanford-ribonanz
   
 下载kaggle数据,  
 > mkdir datamount  
-> cd datamount
-
-这里需要注意得设置kaggle登录口令才能使用kaggle命令下载训练数据, 如有需要口令可以邮件联系我zjhzjh124@icloud.com，或者自己注册一个kaggle账号  
-> export KAGGLE_USERNAME="..."  
-> export KAGGLE_KEY="..."  
+> cd datamount 
 > kaggle datasets download -d iafoss/stanford-ribonanza-rna-folding-converted  
 > unzip -n stanford-ribonanza-rna-folding-converted.zip  
 > rm stanford-ribonanza-rna-folding-converted.zip  
